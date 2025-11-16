@@ -96,28 +96,153 @@ h2 {
     font-size: 1.5em;
 }
 
-/* Input section */
-.input-group {
+/* About section */
+.about-content {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.8;
+}
+
+.about-content p {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.about-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Hobbies section */
+.hobbies-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.hobby-item {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s;
+    font-size: 1.1em;
+}
+
+.hobby-item:hover {
+    background: #e8f5e9;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Countdown section */
+.countdown-display {
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
     flex-wrap: wrap;
 }
 
-input[type="text"],
-input[type="email"] {
-    flex: 1;
-    min-width: 200px;
+.countdown-item {
+    background: #c41e3a;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 100px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-number {
+    display: block;
+    font-size: 2.5em;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.countdown-label {
+    display: block;
+    font-size: 0.9em;
+    margin-top: 5px;
+    opacity: 0.9;
+}
+
+/* Message section */
+.message-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.message-form input[type="text"],
+.message-form textarea {
+    width: 100%;
     padding: 12px;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     font-size: 1em;
+    font-family: inherit;
     transition: border-color 0.3s;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus {
+.message-form input[type="text"]:focus,
+.message-form textarea:focus {
     outline: none;
     border-color: #c41e3a;
+}
+
+.message-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.messages-display {
+    margin-top: 20px;
+}
+
+.no-messages {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.message-item {
+    background: #f5f5f5;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #c41e3a;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.message-author {
+    font-weight: bold;
+    color: #2d5f3f;
+}
+
+.message-time {
+    color: #999;
+    font-size: 0.9em;
+}
+
+.message-content {
+    color: #333;
+    line-height: 1.6;
+    word-wrap: break-word;
 }
 
 /* Buttons */
@@ -142,91 +267,7 @@ input[type="email"]:focus {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.btn-draw {
-    background: #c41e3a;
-    color: white;
-    font-size: 1.3em;
-    padding: 15px 30px;
-    width: 100%;
-    display: block;
-    margin: 20px 0;
-}
 
-.btn-draw:hover:not(:disabled) {
-    background: #a01729;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.btn-draw:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-
-.btn-reset {
-    background: #666;
-    color: white;
-    width: 100%;
-    display: block;
-    margin-top: 20px;
-}
-
-.btn-reset:hover {
-    background: #444;
-}
-
-/* Participants list */
-.participants-list {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 10px;
-}
-
-.participant-item {
-    background: #f5f5f5;
-    padding: 15px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s;
-}
-
-.participant-item:hover {
-    background: #e8f5e9;
-    transform: translateX(5px);
-}
-
-.participant-info {
-    flex: 1;
-}
-
-.participant-name {
-    font-weight: bold;
-    color: #2d5f3f;
-    display: block;
-}
-
-.participant-email {
-    font-size: 0.9em;
-    color: #666;
-    display: block;
-}
-
-.btn-remove {
-    background: #c41e3a;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
-.btn-remove:hover {
-    background: #a01729;
-}
 
 /* Info text */
 .info-text {
@@ -234,36 +275,6 @@ input[type="email"]:focus {
     color: #666;
     font-size: 0.9em;
     margin-top: 10px;
-}
-
-/* Results section */
-.results-section {
-    background: #e8f5e9;
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.results-list {
-    margin: 20px 0;
-}
-
-.result-item {
-    background: white;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border-left: 4px solid #c41e3a;
-}
-
-.result-giver {
-    font-weight: bold;
-    color: #2d5f3f;
-    font-size: 1.1em;
-}
-
-.result-receiver {
-    color: #666;
-    margin-top: 5px;
 }
 
 /* Footer */
@@ -294,8 +305,21 @@ footer {
         width: 100%;
     }
 
-    .participants-list {
+    .hobbies-list {
         grid-template-columns: 1fr;
+    }
+    
+    .countdown-display {
+        gap: 10px;
+    }
+    
+    .countdown-item {
+        min-width: 70px;
+        padding: 15px 10px;
+    }
+    
+    .countdown-number {
+        font-size: 2em;
     }
 }
 
@@ -311,7 +335,7 @@ footer {
     }
 }
 
-.participant-item,
-.result-item {
+.hobby-item,
+.message-item {
     animation: fadeIn 0.3s ease-out;
 }
