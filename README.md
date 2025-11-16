@@ -26,6 +26,17 @@ Eine festliche Website zur Organisation von Secret Santa (Wichtel) Auslosungen!
 
 ## Live Demo
 
-Öffne einfach die `index.html` Datei lokal oder hoste die Dateien auf einem Webserver.
+Die Website ist auf GitHub Pages verfügbar unter:
+**https://bbodensieck.github.io/wichtel-website/**
+
+Alternativ kann die `index.html` Datei auch lokal in einem Webbrowser geöffnet werden.
+
+## Deployment
+
+Die Website wird automatisch auf GitHub Pages deployed:
+- Bei jedem Push zum `main` Branch
+- Manuell über den "Actions" Tab im GitHub Repository
+
+Die Deployment-Konfiguration befindet sich in `.github/workflows/deploy.yml`.
 
 🎄 Frohe Weihnachten! 🎄
