@@ -1,0 +1,317 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5f3f 100%);
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Snowflakes animation */
+.snowflakes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10%;
+    color: white;
+    font-size: 1em;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+.snowflake:nth-child(1) { left: 10%; animation-duration: 10s; animation-delay: 0s; }
+.snowflake:nth-child(2) { left: 20%; animation-duration: 12s; animation-delay: 1s; font-size: 1.2em; }
+.snowflake:nth-child(3) { left: 30%; animation-duration: 8s; animation-delay: 2s; }
+.snowflake:nth-child(4) { left: 40%; animation-duration: 14s; animation-delay: 0.5s; font-size: 0.8em; }
+.snowflake:nth-child(5) { left: 50%; animation-duration: 11s; animation-delay: 1.5s; }
+.snowflake:nth-child(6) { left: 60%; animation-duration: 9s; animation-delay: 3s; font-size: 1.1em; }
+.snowflake:nth-child(7) { left: 70%; animation-duration: 13s; animation-delay: 0s; }
+.snowflake:nth-child(8) { left: 80%; animation-duration: 10s; animation-delay: 2.5s; font-size: 0.9em; }
+.snowflake:nth-child(9) { left: 90%; animation-duration: 12s; animation-delay: 1s; }
+.snowflake:nth-child(10) { left: 15%; animation-duration: 11s; animation-delay: 2s; font-size: 1.3em; }
+
+@keyframes fall {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+    }
+    100% {
+        top: 110%;
+        transform: translateX(100px) rotate(360deg);
+    }
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    color: #c41e3a;
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    color: #2d5f3f;
+    font-size: 1.2em;
+}
+
+/* Sections */
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #2d5f3f;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+/* Input section */
+.input-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+input[type="text"],
+input[type="email"] {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    outline: none;
+    border-color: #c41e3a;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-add {
+    background: #2d5f3f;
+    color: white;
+}
+
+.btn-add:hover {
+    background: #234a32;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-draw {
+    background: #c41e3a;
+    color: white;
+    font-size: 1.3em;
+    padding: 15px 30px;
+    width: 100%;
+    display: block;
+    margin: 20px 0;
+}
+
+.btn-draw:hover:not(:disabled) {
+    background: #a01729;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-draw:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.btn-reset {
+    background: #666;
+    color: white;
+    width: 100%;
+    display: block;
+    margin-top: 20px;
+}
+
+.btn-reset:hover {
+    background: #444;
+}
+
+/* Participants list */
+.participants-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+}
+
+.participant-item {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.participant-item:hover {
+    background: #e8f5e9;
+    transform: translateX(5px);
+}
+
+.participant-info {
+    flex: 1;
+}
+
+.participant-name {
+    font-weight: bold;
+    color: #2d5f3f;
+    display: block;
+}
+
+.participant-email {
+    font-size: 0.9em;
+    color: #666;
+    display: block;
+}
+
+.btn-remove {
+    background: #c41e3a;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.btn-remove:hover {
+    background: #a01729;
+}
+
+/* Info text */
+.info-text {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+/* Results section */
+.results-section {
+    background: #e8f5e9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.results-list {
+    margin: 20px 0;
+}
+
+.result-item {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border-left: 4px solid #c41e3a;
+}
+
+.result-giver {
+    font-weight: bold;
+    color: #2d5f3f;
+    font-size: 1.1em;
+}
+
+.result-receiver {
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #e0e0e0;
+    color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        width: 100%;
+    }
+
+    .participants-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.participant-item,
+.result-item {
+    animation: fadeIn 0.3s ease-out;
+}

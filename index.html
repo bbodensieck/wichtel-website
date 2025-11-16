@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weihnachtswichtel - Secret Santa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🎄 Weihnachtswichtel 🎅</h1>
+            <p class="subtitle">Organisiere deine Secret Santa Auslosung!</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <h2>Teilnehmer hinzufügen</h2>
+                <div class="input-group">
+                    <input type="text" id="participantName" placeholder="Name des Teilnehmers" />
+                    <input type="email" id="participantEmail" placeholder="E-Mail (optional)" />
+                    <button onclick="addParticipant()" class="btn btn-add">Hinzufügen</button>
+                </div>
+            </section>
+
+            <section class="participants-section">
+                <h2>Teilnehmer (<span id="participantCount">0</span>)</h2>
+                <ul id="participantsList" class="participants-list"></ul>
+            </section>
+
+            <section class="draw-section">
+                <button onclick="drawWichtel()" class="btn btn-draw" id="drawButton">
+                    🎁 Wichtel auslosen
+                </button>
+                <p class="info-text">Mindestens 3 Teilnehmer erforderlich</p>
+            </section>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>Auslosung abgeschlossen! 🎉</h2>
+                <div id="resultsList" class="results-list"></div>
+                <button onclick="resetDraw()" class="btn btn-reset">Neue Auslosung</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>🎄 Frohe Weihnachten! 🎄</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
