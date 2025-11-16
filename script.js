@@ -1,170 +1,107 @@
-// Store participants
-let participants = [];
-let assignments = [];
+// Store messages
+let messages = [];
 
-// Add participant
-function addParticipant() {
-    const nameInput = document.getElementById('participantName');
-    const emailInput = document.getElementById('participantEmail');
+// Countdown to December 1st, 2025
+function updateCountdown() {
+    const targetDate = new Date('2025-12-01T00:00:00');
+    const now = new Date();
+    const difference = targetDate - now;
+
+    if (difference <= 0) {
+        document.getElementById('days').textContent = '0';
+        document.getElementById('hours').textContent = '0';
+        document.getElementById('minutes').textContent = '0';
+        document.getElementById('seconds').textContent = '0';
+        return;
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = hours;
+    document.getElementById('minutes').textContent = minutes;
+    document.getElementById('seconds').textContent = seconds;
+}
+
+// Add message
+function addMessage() {
+    const nameInput = document.getElementById('messageName');
+    const textInput = document.getElementById('messageText');
     
     const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
+    const text = textInput.value.trim();
     
-    if (!name) {
-        alert('Bitte gib einen Namen ein!');
+    if (!name || !text) {
+        alert('Bitte fülle beide Felder aus!');
         return;
     }
     
-    // Check if participant already exists
-    if (participants.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-        alert('Dieser Teilnehmer existiert bereits!');
-        return;
-    }
+    // Add message
+    const message = {
+        name: name,
+        text: text,
+        timestamp: new Date()
+    };
     
-    // Add participant
-    participants.push({ name, email });
+    messages.push(message);
     
     // Clear inputs
     nameInput.value = '';
-    emailInput.value = '';
+    textInput.value = '';
     nameInput.focus();
     
     // Update display
-    updateParticipantsList();
-    updateDrawButton();
+    displayMessages();
+    
+    // Show confirmation
+    alert('Vielen Dank für deine Nachricht! Alvar freut sich sehr! 🎄');
 }
 
-// Remove participant
-function removeParticipant(index) {
-    if (confirm(`Möchtest du ${participants[index].name} wirklich entfernen?`)) {
-        participants.splice(index, 1);
-        updateParticipantsList();
-        updateDrawButton();
-    }
-}
-
-// Update participants list display
-function updateParticipantsList() {
-    const list = document.getElementById('participantsList');
-    const count = document.getElementById('participantCount');
+// Display messages
+function displayMessages() {
+    const display = document.getElementById('messagesDisplay');
     
-    count.textContent = participants.length;
-    
-    if (participants.length === 0) {
-        list.innerHTML = '<li style="text-align: center; color: #999; padding: 20px;">Noch keine Teilnehmer hinzugefügt</li>';
+    if (messages.length === 0) {
+        display.innerHTML = '<p class="no-messages">Noch keine Nachrichten. Sei der Erste, der Alvar schreibt!</p>';
         return;
     }
     
-    list.innerHTML = participants.map((participant, index) => `
-        <li class="participant-item">
-            <div class="participant-info">
-                <span class="participant-name">🎅 ${participant.name}</span>
-                ${participant.email ? `<span class="participant-email">${participant.email}</span>` : ''}
+    display.innerHTML = messages.map((message, index) => `
+        <div class="message-item">
+            <div class="message-header">
+                <span class="message-author">✉️ ${message.name}</span>
+                <span class="message-time">${formatDate(message.timestamp)}</span>
             </div>
-            <button onclick="removeParticipant(${index})" class="btn-remove">Entfernen</button>
-        </li>
-    `).join('');
-}
-
-// Update draw button state
-function updateDrawButton() {
-    const drawButton = document.getElementById('drawButton');
-    drawButton.disabled = participants.length < 3;
-}
-
-// Fisher-Yates shuffle algorithm
-function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-}
-
-// Draw Wichtel (Secret Santa)
-function drawWichtel() {
-    if (participants.length < 3) {
-        alert('Du benötigst mindestens 3 Teilnehmer für eine Auslosung!');
-        return;
-    }
-    
-    // Create a valid assignment where no one gifts to themselves
-    let receivers;
-    let isValid = false;
-    let attempts = 0;
-    const maxAttempts = 100;
-    
-    while (!isValid && attempts < maxAttempts) {
-        receivers = shuffleArray(participants);
-        
-        // Check if anyone got themselves
-        isValid = participants.every((giver, index) => 
-            giver.name !== receivers[index].name
-        );
-        
-        attempts++;
-    }
-    
-    if (!isValid) {
-        alert('Fehler beim Auslosen. Bitte versuche es erneut.');
-        return;
-    }
-    
-    // Create assignments
-    assignments = participants.map((giver, index) => ({
-        giver: giver.name,
-        giverEmail: giver.email,
-        receiver: receivers[index].name,
-        receiverEmail: receivers[index].email
-    }));
-    
-    // Show results
-    displayResults();
-}
-
-// Display results
-function displayResults() {
-    const resultsSection = document.getElementById('resultsSection');
-    const resultsList = document.getElementById('resultsList');
-    
-    resultsList.innerHTML = assignments.map(assignment => `
-        <div class="result-item">
-            <div class="result-giver">🎁 ${assignment.giver}</div>
-            <div class="result-receiver">beschenkt → ${assignment.receiver}</div>
+            <div class="message-content">${message.text}</div>
         </div>
-    `).join('');
-    
-    resultsSection.style.display = 'block';
-    resultsSection.scrollIntoView({ behavior: 'smooth' });
+    `).reverse().join('');
 }
 
-// Reset draw
-function resetDraw() {
-    if (confirm('Möchtest du wirklich eine neue Auslosung starten? Die aktuelle Zuteilung geht verloren.')) {
-        assignments = [];
-        document.getElementById('resultsSection').style.display = 'none';
-    }
+// Format date
+function formatDate(date) {
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return date.toLocaleDateString('de-DE', options);
 }
 
-// Allow Enter key to add participant
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
-    const nameInput = document.getElementById('participantName');
-    const emailInput = document.getElementById('participantEmail');
+    // Start countdown
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    
+    // Display initial messages
+    displayMessages();
+    
+    // Add Enter key support for message form
+    const nameInput = document.getElementById('messageName');
+    const textInput = document.getElementById('messageText');
     
     nameInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            addParticipant();
+            textInput.focus();
         }
     });
-    
-    emailInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            addParticipant();
-        }
-    });
-    
-    // Initial update
-    updateParticipantsList();
-    updateDrawButton();
 });

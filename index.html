@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weihnachtswichtel - Secret Santa</title>
+    <title>Alvar der Weihnachtswichtel</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,41 +22,67 @@
 
     <div class="container">
         <header>
-            <h1>🎄 Weihnachtswichtel 🎅</h1>
-            <p class="subtitle">Organisiere deine Secret Santa Auslosung!</p>
+            <h1>🎄 Alvar der Weihnachtswichtel 🎅</h1>
+            <p class="subtitle">Hallo! Ich bin Alvar und ziehe bald bei euch ein!</p>
         </header>
 
         <main>
-            <section class="input-section">
-                <h2>Teilnehmer hinzufügen</h2>
-                <div class="input-group">
-                    <input type="text" id="participantName" placeholder="Name des Teilnehmers" />
-                    <input type="email" id="participantEmail" placeholder="E-Mail (optional)" />
-                    <button onclick="addParticipant()" class="btn btn-add">Hinzufügen</button>
+            <section class="about-section">
+                <h2>👋 Über mich</h2>
+                <div class="about-content">
+                    <p>Hallo! Ich bin <strong>Alvar</strong>, ein Weihnachtswichtel aus dem hohen Norden. Bald ziehe ich bei euch ein und freue mich schon riesig darauf!</p>
+                    <p>Ich bin klein, fröhlich und liebe alles, was mit Weihnachten zu tun hat. Meine Lieblingsfarbe ist rot und ich trage immer meine spitze Zipfelmütze.</p>
                 </div>
             </section>
 
-            <section class="participants-section">
-                <h2>Teilnehmer (<span id="participantCount">0</span>)</h2>
-                <ul id="participantsList" class="participants-list"></ul>
+            <section class="hobbies-section">
+                <h2>🎨 Was ich gerne mache</h2>
+                <ul class="hobbies-list">
+                    <li class="hobby-item">🎁 Geschenke verpacken</li>
+                    <li class="hobby-item">🍪 Plätzchen backen</li>
+                    <li class="hobby-item">⭐ Sterne basteln</li>
+                    <li class="hobby-item">🎵 Weihnachtslieder singen</li>
+                    <li class="hobby-item">❄️ Im Schnee spielen</li>
+                    <li class="hobby-item">📖 Geschichten erzählen</li>
+                </ul>
             </section>
 
-            <section class="draw-section">
-                <button onclick="drawWichtel()" class="btn btn-draw" id="drawButton">
-                    🎁 Wichtel auslosen
-                </button>
-                <p class="info-text">Mindestens 3 Teilnehmer erforderlich</p>
+            <section class="countdown-section">
+                <h2>⏰ Countdown bis zu meinem Einzug</h2>
+                <div id="countdown" class="countdown-display">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">0</span>
+                        <span class="countdown-label">Tage</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">0</span>
+                        <span class="countdown-label">Stunden</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">0</span>
+                        <span class="countdown-label">Minuten</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">0</span>
+                        <span class="countdown-label">Sekunden</span>
+                    </div>
+                </div>
+                <p class="info-text">Ich ziehe am 1. Dezember 2025 ein!</p>
             </section>
 
-            <section class="results-section" id="resultsSection" style="display: none;">
-                <h2>Auslosung abgeschlossen! 🎉</h2>
-                <div id="resultsList" class="results-list"></div>
-                <button onclick="resetDraw()" class="btn btn-reset">Neue Auslosung</button>
+            <section class="message-section">
+                <h2>💌 Hinterlasse mir eine Nachricht</h2>
+                <div class="message-form">
+                    <input type="text" id="messageName" placeholder="Dein Name" />
+                    <textarea id="messageText" placeholder="Deine Nachricht an Alvar..." rows="4"></textarea>
+                    <button onclick="addMessage()" class="btn btn-add">Nachricht senden 📨</button>
+                </div>
+                <div id="messagesDisplay" class="messages-display"></div>
             </section>
         </main>
 
         <footer>
-            <p>🎄 Frohe Weihnachten! 🎄</p>
+            <p>🎄 Alvar freut sich auf die Weihnachtszeit mit euch! 🎄</p>
         </footer>
     </div>
 
